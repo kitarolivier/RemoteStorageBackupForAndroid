@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Remote Storage Backup</string>
+    <string name="submit">Submit</string>
+    <string name="skip">Skip</string>
+    <string name="score">Score</string>
+    <string name="word_count">Word Count#</string>
+    <string name="instructions">These are the instructions</string>
+    <string name="wrong_guess">Wrong Guest</string>
+    <string name="enter_your_word">"Enter your word "</string>
+    <string name="congratulations">Congratulations</string>
+    <string name="you_scored">You Scored</string>
+    <string name="exit">Exit</string>
+    <string name="play_again">Play Again</string>
+</resources>
