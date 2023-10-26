@@ -7,6 +7,10 @@ android {
     namespace = "com.kit.remotestoragebackup"
     compileSdk = 33
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.kit.remotestoragebackup"
         minSdk = 29
