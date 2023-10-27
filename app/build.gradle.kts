@@ -8,7 +8,7 @@ android {
     compileSdk = 33
 
     buildFeatures {
-        buildConfig = true
+        buildConfig = true //if BuildConfig is missing, set to false, SYNC, and set to true and rebuild
     }
 
     defaultConfig {

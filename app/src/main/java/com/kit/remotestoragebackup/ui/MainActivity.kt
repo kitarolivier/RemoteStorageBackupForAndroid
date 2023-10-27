@@ -17,28 +17,26 @@ import com.kit.remotestoragebackup.ui.screens.MainScreen
 import com.kit.remotestoragebackup.ui.theme.RemoteStorageBackupTheme
 
 class MainActivity : ComponentActivity() {
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val uri = Uri.parse("package:${BuildConfig.APPLICATION_ID}")
 
+        /* TODO Check permissions
         startActivity(
             Intent(
                 Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
                 uri
             )
         )
+        */
 
         //val volumeNames = MediaStore.getExternalVolumeNames(this).toTypedArray()
 
             //    it?.parentFile?.parentFile?.parentFile?.parentFile})
 
-        val publicStorages = ContextCompat.getExternalFilesDirs(this, null).mapNotNull {
-            it?.parentFile?.parentFile?.parentFile?.parentFile}
+        //val publicStorages = ContextCompat.getExternalFilesDirs(this, null).mapNotNull {
+        //    it?.parentFile?.parentFile?.parentFile?.parentFile}
 
         setContent {
             RemoteStorageBackupTheme {
