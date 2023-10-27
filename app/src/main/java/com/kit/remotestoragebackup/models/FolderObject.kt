@@ -11,7 +11,8 @@ import java.io.File
 
 enum class FolderType {
     STORAGE,
-    USB
+    USB,
+    MOUNTED_VOLUME
 }
 class FolderObject(
     var folderType : FolderType,

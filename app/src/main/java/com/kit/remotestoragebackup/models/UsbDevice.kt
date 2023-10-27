@@ -6,4 +6,9 @@ data class UsbDevice(
     val manufacturer : String,
     val type : String
 ) {
+
+    override
+    fun toString() :String {
+        return "${id},${model},${manufacturer},${type}"
+    }
 }

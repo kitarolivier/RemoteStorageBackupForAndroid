@@ -1,7 +1,7 @@
 package com.kit.remotestoragebackup.models
 
-import android.content.Context
-import android.hardware.usb.UsbManager
+import android.app.AppOpsManager
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,8 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.core.content.PackageManagerCompat.LOG_TAG
 import com.kit.remotestoragebackup.MyApplication.Companion.appContext
+import com.kit.remotestoragebackup.utils.StorageUtils
 import java.io.File
+import java.lang.reflect.InvocationTargetException
+
 
 class BrowseFolderState {
   var folderList : ArrayList<FolderObject>
@@ -23,7 +27,16 @@ class BrowseFolderState {
   init {
     folderList = ArrayList<FolderObject>()
 
+    val storage = StorageUtils()
+      .storageList
 
+    storage.forEach { s ->
+      val mounted = MountedFolder(s.path)
+      folderList.add(FolderObject( FolderType.MOUNTED_VOLUME,mounted as Any))
+    }
+
+
+    /*
     val usbManager: UsbManager = appContext.getSystemService(Context.USB_SERVICE) as UsbManager
     for (device in usbManager.deviceList.values) {
       val dev = UsbDevice(id=device.deviceId.toString(), model = device.deviceName, manufacturer = device.manufacturerName.toString(),type="device")
@@ -37,7 +50,7 @@ class BrowseFolderState {
         folderList.add(folder)
       }
     }
-
+  */
     /*
     //Internal / External / Usb storage
     val publicStorages = ContextCompat.getExternalFilesDirs(appContext, null).mapNotNull {
@@ -85,8 +98,16 @@ fun DisplayFolderList(state : BrowseFolderState) {
             val d : UsbDevice = f.folder as UsbDevice
             ClickableText(
               onClick = { state.onFolderClick(folder = f) },
-              text = AnnotatedString("${d.id},${d.model},${d.manufacturer},${d.type}"),
+              text = AnnotatedString(d.toString()),
               style = TextStyle(color = Color.Red)
+            )
+          }
+          FolderType.MOUNTED_VOLUME -> {
+            val m = f.folder as MountedFolder
+            ClickableText(
+              onClick = { state.onFolderClick(folder = f) },
+              text = AnnotatedString(m.volume),
+              style = TextStyle(color = Color.Green)
             )
           }
         }
